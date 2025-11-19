@@ -1,0 +1,313 @@
+2025-11-18 15:18:42,886 - INFO - Iniciando aplicación de simulación de proyectiles
+2025-11-18 15:18:43,319 - ERROR - Error crítico al iniciar la aplicación: 'InterfazSimulacionProyectiles' object has no attribute 'calcular_solucion_optima'
+2025-11-18 15:19:04,040 - INFO - Iniciando aplicación de simulación de proyectiles
+2025-11-18 15:19:04,356 - ERROR - Error crítico al iniciar la aplicación: 'InterfazSimulacionProyectiles' object has no attribute 'calcular_solucion_optima'
+2025-11-18 15:24:28,602 - INFO - Iniciando aplicación de simulación de proyectiles
+2025-11-18 15:30:41,641 - INFO - Iniciando aplicación de simulación de proyectiles
+2025-11-18 15:31:46,727 - INFO - Iniciando aplicación de simulación de proyectiles
+2025-11-18 15:34:07,928 - INFO - Cerrando aplicación
+2025-11-18 15:40:48,685 - INFO - Iniciando aplicación de simulación de proyectiles
+2025-11-18 15:41:06,399 - INFO - Cerrando aplicación
+2025-11-18 15:42:17,278 - INFO - Iniciando aplicación de simulación de proyectiles
+2025-11-18 15:50:54,043 - INFO - Iniciando aplicación de simulación de proyectiles
+2025-11-18 16:25:42,231 - INFO - Iniciando aplicación de simulación de proyectiles
+2025-11-18 16:25:46,438 - INFO - === INICIANDO SIMULACIÓN ===
+2025-11-18 16:25:46,439 - INFO - Parámetros entrada: D=50.0, h=10.0, v=30.0, phi=45.0°
+2025-11-18 16:25:46,440 - INFO - T=2.0s, tc(optimo)=4.7537s, u=56.4185m/s, theta=13.8514°
+2025-11-18 16:25:46,441 - INFO - t_max proyectil A: 4.7537s
+2025-11-18 16:25:46,442 - INFO - Simulando 300 pasos desde t=0 hasta t=4.7061s
+2025-11-18 16:25:46,443 - INFO - Velocidad B calculada: u=56.4185, theta=13.8514°
+2025-11-18 16:25:46,444 - INFO - Componentes B: vx=54.7778, vy=13.5068
+2025-11-18 16:25:46,725 - INFO - B Lanzado en t=2.0147s, posB inicial: [0. 0.], velB: [54.77781282 13.5068358 ]
+2025-11-18 16:25:46,730 - INFO - Rango xB: [0.00, 147.30]
+2025-11-18 16:25:46,730 - INFO - Rango yB: [0.00, 10.51]
+2025-11-18 16:25:46,978 - INFO - Creando animación...
+2025-11-18 16:26:01,274 - INFO - === INICIANDO SIMULACIÓN ===
+2025-11-18 16:26:01,275 - INFO - Parámetros entrada: D=50.0, h=10.0, v=30.0, phi=45.0°
+2025-11-18 16:26:01,276 - INFO - T=2.0s, tc(optimo)=4.7537s, u=56.4185m/s, theta=13.8514°
+2025-11-18 16:26:01,277 - INFO - t_max proyectil A: 4.7537s
+2025-11-18 16:26:01,278 - INFO - Simulando 300 pasos desde t=0 hasta t=4.7061s
+2025-11-18 16:26:01,279 - INFO - Velocidad B calculada: u=56.4185, theta=13.8514°
+2025-11-18 16:26:01,280 - INFO - Componentes B: vx=54.7778, vy=13.5068
+2025-11-18 16:26:01,292 - INFO - B Lanzado en t=2.0147s, posB inicial: [0. 0.], velB: [54.77781282 13.5068358 ]
+2025-11-18 16:26:01,301 - INFO - Rango xB: [0.00, 145.05]
+2025-11-18 16:26:01,302 - INFO - Rango yB: [0.00, 9.90]
+2025-11-18 16:26:01,411 - INFO - Creando animación...
+2025-11-18 16:30:56,582 - INFO - === INICIANDO SIMULACIÓN ===
+2025-11-18 16:30:56,583 - INFO - Parámetros entrada: D=2.0, h=10.0, v=30.0, phi=45.0°
+2025-11-18 16:30:56,584 - INFO - T=1.0s, tc(optimo)=4.7537s, u=33.0092m/s, theta=33.9023°
+2025-11-18 16:30:56,584 - INFO - t_max proyectil A: 4.7537s
+2025-11-18 16:30:56,585 - INFO - Simulando 300 pasos desde t=0 hasta t=4.7061s
+2025-11-18 16:30:56,586 - INFO - Velocidad B calculada: u=33.0092, theta=33.9023°
+2025-11-18 16:30:56,587 - INFO - Componentes B: vx=27.3973, vy=18.4118
+2025-11-18 16:30:56,595 - INFO - B Lanzado en t=1.0073s, posB inicial: [0. 0.], velB: [27.39731175 18.41183454]
+2025-11-18 16:30:56,609 - INFO - Rango xB: [0.00, 98.42]
+2025-11-18 16:30:56,609 - INFO - Rango yB: [0.00, 17.31]
+2025-11-18 16:30:56,711 - INFO - Creando animación...
+2025-11-18 16:32:59,997 - INFO - 
+============================================================
+2025-11-18 16:32:59,998 - INFO - CALCULANDO SOLUCIÓN ÓPTIMA
+2025-11-18 16:32:59,999 - INFO - ============================================================
+2025-11-18 16:33:00,000 - INFO - Parámetros de entrada: D=2.0, h=10.0, v=13.0, phi=80.00°, T=2.0
+2025-11-18 16:33:00,001 - INFO - t_max calculado: 3.2394s
+2025-11-18 16:33:00,002 - INFO - Intervalo de búsqueda: [2.0010, 3.2394]
+2025-11-18 16:33:00,003 - INFO - Resultados:
+2025-11-18 16:33:00,004 - INFO -   tc_optimo: 3.239440s
+2025-11-18 16:33:00,004 - INFO -   u_optimo: 9.665180m/s
+2025-11-18 16:33:00,005 - INFO -   theta_optimo: 38.976834°
+2025-11-18 16:33:00,006 - INFO - Solución guardada exitosamente
+2025-11-18 16:33:01,732 - INFO - === INICIANDO SIMULACIÓN ===
+2025-11-18 16:33:01,733 - INFO - Parámetros entrada: D=2.0, h=10.0, v=13.0, phi=80.0°
+2025-11-18 16:33:01,733 - INFO - T=2.0s, tc(optimo)=3.2394s, u=9.6652m/s, theta=38.9768°
+2025-11-18 16:33:01,734 - INFO - t_max proyectil A: 3.2394s
+2025-11-18 16:33:01,736 - INFO - Simulando 300 pasos desde t=0 hasta t=3.2070s
+2025-11-18 16:33:01,737 - INFO - Velocidad B calculada: u=9.6652, theta=38.9768°
+2025-11-18 16:33:01,737 - INFO - Componentes B: vx=7.5137, vy=6.0795
+2025-11-18 16:33:01,743 - INFO - B Lanzado en t=2.0057s, posB inicial: [0. 0.], velB: [7.51371429 6.07945741]
+2025-11-18 16:33:01,748 - INFO - Rango xB: [0.00, 9.11]
+2025-11-18 16:33:01,748 - INFO - Rango yB: [0.00, 1.92]
+2025-11-18 16:33:01,859 - INFO - Creando animación...
+2025-11-18 16:35:09,110 - INFO - === INICIANDO SIMULACIÓN ===
+2025-11-18 16:35:09,111 - INFO - Parámetros entrada: D=2.0, h=10.0, v=100.0, phi=80.0°
+2025-11-18 16:35:09,112 - INFO - T=2.0s, tc(optimo)=20.1787s, u=91.2493m/s, theta=77.7344°
+2025-11-18 16:35:09,112 - INFO - t_max proyectil A: 20.1787s
+2025-11-18 16:35:09,113 - INFO - Simulando 399 pasos desde t=0 hasta t=19.9769s
+2025-11-18 16:35:09,114 - INFO - Velocidad B calculada: u=91.2493, theta=77.7344°
+2025-11-18 16:35:09,115 - INFO - Componentes B: vx=19.3853, vy=89.1663
+2025-11-18 16:35:09,117 - INFO - B Lanzado en t=2.0077s, posB inicial: [0. 0.], velB: [19.38529825 89.16634849]
+2025-11-18 16:35:09,131 - INFO - Rango xB: [0.00, 349.31]
+2025-11-18 16:35:09,132 - INFO - Rango yB: [0.00, 407.47]
+2025-11-18 16:35:09,238 - INFO - Creando animación...
+2025-11-18 16:35:37,299 - INFO - 
+============================================================
+2025-11-18 16:35:37,300 - INFO - CALCULANDO SOLUCIÓN ÓPTIMA
+2025-11-18 16:35:37,300 - INFO - ============================================================
+2025-11-18 16:35:37,301 - INFO - Parámetros de entrada: D=2.0, h=10.0, v=10.0, phi=80.00°, T=2.0
+2025-11-18 16:35:37,301 - INFO - t_max calculado: 2.7493s
+2025-11-18 16:35:37,301 - INFO - Intervalo de búsqueda: [2.0010, 2.7493]
+2025-11-18 16:35:37,302 - INFO - Resultados:
+2025-11-18 16:35:37,303 - INFO -   tc_optimo: 2.749308s
+2025-11-18 16:35:37,303 - INFO -   u_optimo: 9.759051m/s
+2025-11-18 16:35:37,303 - INFO -   theta_optimo: 22.123894°
+2025-11-18 16:35:37,304 - INFO - Solución guardada exitosamente
+2025-11-18 16:39:10,991 - INFO - === INICIANDO SIMULACIÓN ===
+2025-11-18 16:39:10,992 - INFO - Parámetros entrada: D=2.0, h=100.0, v=10.0, phi=1.0°
+2025-11-18 16:39:10,993 - INFO - T=2.0s, tc(optimo)=4.5331s, u=22.4367m/s, theta=33.6257°
+2025-11-18 16:39:10,994 - INFO - t_max proyectil A: 4.5331s
+2025-11-18 16:39:10,995 - INFO - Simulando 300 pasos desde t=0 hasta t=4.4877s
+2025-11-18 16:39:10,995 - INFO - Velocidad B calculada: u=22.4367, theta=33.6257°
+2025-11-18 16:39:10,996 - INFO - Componentes B: vx=18.6824, vy=12.4247
+2025-11-18 16:39:11,000 - INFO - B Lanzado en t=2.0112s, posB inicial: [0. 0.], velB: [18.68241701 12.42467383]
+2025-11-18 16:39:11,009 - INFO - Rango xB: [0.00, 46.55]
+2025-11-18 16:39:11,010 - INFO - Rango yB: [0.00, 7.96]
+2025-11-18 16:39:11,124 - INFO - Creando animación...
+2025-11-18 16:43:06,065 - INFO - 
+============================================================
+2025-11-18 16:43:06,066 - INFO - CALCULANDO SOLUCIÓN ÓPTIMA
+2025-11-18 16:43:06,067 - INFO - ============================================================
+2025-11-18 16:43:06,068 - INFO - Parámetros de entrada: D=2.0, h=100.0, v=10.0, phi=1.00°, T=3.0
+2025-11-18 16:43:06,068 - INFO - t_max calculado: 4.5331s
+2025-11-18 16:43:06,069 - INFO - Intervalo de búsqueda: [3.0010, 4.5331]
+2025-11-18 16:43:06,071 - INFO - Resultados:
+2025-11-18 16:43:06,072 - INFO -   tc_optimo: 4.533061s
+2025-11-18 16:43:06,073 - INFO -   u_optimo: 31.771466m/s
+2025-11-18 16:43:06,074 - INFO -   theta_optimo: 13.690688°
+2025-11-18 16:43:06,076 - INFO - Solución guardada exitosamente
+2025-11-18 16:43:07,266 - INFO - === INICIANDO SIMULACIÓN ===
+2025-11-18 16:43:07,267 - INFO - Parámetros entrada: D=2.0, h=100.0, v=10.0, phi=1.0°
+2025-11-18 16:43:07,267 - INFO - T=3.0s, tc(optimo)=4.5331s, u=31.7715m/s, theta=13.6907°
+2025-11-18 16:43:07,268 - INFO - t_max proyectil A: 4.5331s
+2025-11-18 16:43:07,268 - INFO - Simulando 300 pasos desde t=0 hasta t=4.4877s
+2025-11-18 16:43:07,269 - INFO - Velocidad B calculada: u=31.7715, theta=13.6907°
+2025-11-18 16:43:07,269 - INFO - Componentes B: vx=30.8688, vy=7.5197
+2025-11-18 16:43:07,273 - INFO - B Lanzado en t=3.0018s, posB inicial: [0. 0.], velB: [30.86876263  7.51967841]
+2025-11-18 16:43:07,276 - INFO - Rango xB: [0.00, 46.33]
+2025-11-18 16:43:07,277 - INFO - Rango yB: [0.00, 2.94]
+2025-11-18 16:43:07,384 - INFO - Creando animación...
+2025-11-18 16:43:52,674 - INFO - === INICIANDO SIMULACIÓN ===
+2025-11-18 16:43:52,675 - INFO - Parámetros entrada: D=2.0, h=100.0, v=10.0, phi=1.0°
+2025-11-18 16:43:52,676 - INFO - T=0.0s, tc(optimo)=4.5331s, u=24.5635m/s, theta=64.8489°
+2025-11-18 16:43:52,676 - INFO - t_max proyectil A: 4.5331s
+2025-11-18 16:43:52,677 - INFO - Simulando 300 pasos desde t=0 hasta t=4.4877s
+2025-11-18 16:43:52,678 - INFO - Velocidad B calculada: u=24.5635, theta=64.8489°
+2025-11-18 16:43:52,679 - INFO - Componentes B: vx=10.4397, vy=22.2347
+2025-11-18 16:43:52,680 - INFO - B Lanzado en t=0.0000s, posB inicial: [0. 0.], velB: [10.43967989 22.2346708 ]
+2025-11-18 16:43:52,693 - INFO - Rango xB: [0.16, 47.01]
+2025-11-18 16:43:52,694 - INFO - Rango yB: [0.33, 25.36]
+2025-11-18 16:43:52,810 - INFO - Creando animación...
+2025-11-18 16:49:43,491 - INFO - === INICIANDO SIMULACIÓN ===
+2025-11-18 16:49:43,492 - INFO - Parámetros entrada: D=2.0, h=100.0, v=5.0, phi=1.0°
+2025-11-18 16:49:43,493 - INFO - T=2.0s, tc(optimo)=4.5241s, u=15.7608m/s, theta=51.7717°
+2025-11-18 16:49:43,494 - INFO - t_max proyectil A: 4.5241s
+2025-11-18 16:49:43,495 - INFO - Simulando 300 pasos desde t=0 hasta t=4.4789s
+2025-11-18 16:49:43,495 - INFO - Velocidad B calculada: u=15.7608, theta=51.7717°
+2025-11-18 16:49:43,496 - INFO - Componentes B: vx=9.7527, vy=12.3809
+2025-11-18 16:49:43,510 - INFO - B Lanzado en t=2.0073s, posB inicial: [0. 0.], velB: [ 9.75272961 12.38091388]
+2025-11-18 16:49:43,526 - INFO - Rango xB: [0.00, 30.25]
+2025-11-18 16:49:43,527 - INFO - Rango yB: [0.00, 7.54]
+2025-11-18 16:49:43,620 - INFO - Creando animación...
+2025-11-18 16:49:58,045 - INFO - 
+============================================================
+2025-11-18 16:49:58,045 - INFO - CALCULANDO SOLUCIÓN ÓPTIMA
+2025-11-18 16:49:58,045 - INFO - ============================================================
+2025-11-18 16:49:58,046 - INFO - Parámetros de entrada: D=2.0, h=100.0, v=5.0, phi=1.00°, T=0.0
+2025-11-18 16:49:58,046 - INFO - t_max calculado: 4.5241s
+2025-11-18 16:49:58,046 - INFO - Intervalo de búsqueda: [0.0010, 4.5241]
+2025-11-18 16:49:58,047 - INFO - Resultados:
+2025-11-18 16:49:58,047 - INFO -   tc_optimo: 4.524140s
+2025-11-18 16:49:58,047 - INFO -   u_optimo: 22.848291m/s
+2025-11-18 16:49:58,047 - INFO -   theta_optimo: 76.222646°
+2025-11-18 16:49:58,048 - INFO - Solución guardada exitosamente
+2025-11-18 16:49:59,131 - INFO - === INICIANDO SIMULACIÓN ===
+2025-11-18 16:49:59,131 - INFO - Parámetros entrada: D=2.0, h=100.0, v=5.0, phi=1.0°
+2025-11-18 16:49:59,131 - INFO - T=0.0s, tc(optimo)=4.5241s, u=22.8483m/s, theta=76.2226°
+2025-11-18 16:49:59,131 - INFO - t_max proyectil A: 4.5241s
+2025-11-18 16:49:59,131 - INFO - Simulando 300 pasos desde t=0 hasta t=4.4789s
+2025-11-18 16:49:59,132 - INFO - Velocidad B calculada: u=22.8483, theta=76.2226°
+2025-11-18 16:49:59,132 - INFO - Componentes B: vx=5.4413, vy=22.1909
+2025-11-18 16:49:59,132 - INFO - B Lanzado en t=0.0000s, posB inicial: [0. 0.], velB: [ 5.44131145 22.19091085]
+2025-11-18 16:49:59,140 - INFO - Rango xB: [0.08, 20.57]
+2025-11-18 16:49:59,140 - INFO - Rango yB: [0.00, 24.98]
+2025-11-18 16:49:59,259 - INFO - Creando animación...
+2025-11-18 16:50:28,192 - INFO - === INICIANDO SIMULACIÓN ===
+2025-11-18 16:50:28,192 - INFO - Parámetros entrada: D=2.0, h=100.0, v=5.0, phi=1.0°
+2025-11-18 16:50:28,193 - INFO - T=0.0s, tc(optimo)=4.5241s, u=22.8483m/s, theta=76.2226°
+2025-11-18 16:50:28,193 - INFO - t_max proyectil A: 4.5241s
+2025-11-18 16:50:28,193 - INFO - Simulando 300 pasos desde t=0 hasta t=4.4789s
+2025-11-18 16:50:28,194 - INFO - Velocidad B calculada: u=22.8483, theta=76.2226°
+2025-11-18 16:50:28,194 - INFO - Componentes B: vx=5.4413, vy=22.1909
+2025-11-18 16:50:28,195 - INFO - B Lanzado en t=0.0000s, posB inicial: [0. 0.], velB: [ 5.44131145 22.19091085]
+2025-11-18 16:50:28,200 - INFO - Rango xB: [0.08, 24.45]
+2025-11-18 16:50:28,200 - INFO - Rango yB: [0.33, 25.26]
+2025-11-18 16:50:28,305 - INFO - Creando animación...
+2025-11-18 16:51:03,886 - INFO - === INICIANDO SIMULACIÓN ===
+2025-11-18 16:51:03,887 - INFO - Parámetros entrada: D=1.0, h=50.0, v=0.5, phi=1.0°
+2025-11-18 16:51:03,888 - INFO - T=0.0s, tc(optimo)=3.1936s, u=15.6859m/s, theta=87.0289°
+2025-11-18 16:51:03,889 - INFO - t_max proyectil A: 3.1936s
+2025-11-18 16:51:03,890 - INFO - Simulando 300 pasos desde t=0 hasta t=3.1617s
+2025-11-18 16:51:03,891 - INFO - Velocidad B calculada: u=15.6859, theta=87.0289°
+2025-11-18 16:51:03,891 - INFO - Componentes B: vx=0.8130, vy=15.6648
+2025-11-18 16:51:03,893 - INFO - B Lanzado en t=0.0000s, posB inicial: [0. 0.], velB: [ 0.81304583 15.66482508]
+2025-11-18 16:51:03,900 - INFO - Rango xB: [0.01, 2.58]
+2025-11-18 16:51:03,901 - INFO - Rango yB: [0.17, 12.59]
+2025-11-18 16:51:04,003 - INFO - Creando animación...
+2025-11-18 16:52:50,170 - INFO - === INICIANDO SIMULACIÓN ===
+2025-11-18 16:52:50,171 - INFO - Parámetros entrada: D=80.0, h=25.0, v=40.0, phi=55.0°
+2025-11-18 16:52:50,172 - INFO - T=3.0s, tc(optimo)=7.3716s, u=60.8885m/s, theta=20.6195°
+2025-11-18 16:52:50,173 - INFO - t_max proyectil A: 7.3716s
+2025-11-18 16:52:50,174 - INFO - Simulando 600 pasos desde t=0 hasta t=7.2978s
+2025-11-18 16:52:50,175 - INFO - Velocidad B calculada: u=60.8885, theta=20.6195°
+2025-11-18 16:52:50,176 - INFO - Componentes B: vx=56.9879, vy=21.4425
+2025-11-18 16:52:50,185 - INFO - B Lanzado en t=3.0093s, posB inicial: [0. 0.], velB: [56.98793755 21.44249669]
+2025-11-18 16:52:50,198 - INFO - Rango xB: [0.00, 245.09]
+2025-11-18 16:52:50,199 - INFO - Rango yB: [0.00, 23.57]
+2025-11-18 16:52:50,302 - INFO - Creando animación...
+2025-11-18 16:53:04,426 - INFO - Cerrando aplicación
+2025-11-18 17:12:48,188 - INFO - Iniciando aplicación de simulación de proyectiles
+2025-11-18 17:15:10,607 - INFO - === INICIANDO SIMULACIÓN ===
+2025-11-18 17:15:10,608 - INFO - Parámetros entrada: D=50.0, h=10.0, v=30.0, phi=45.0°
+2025-11-18 17:15:10,609 - INFO - T=2.0s, tc(optimo)=4.7497s, u=9.9823m/s, theta=13.8565°
+2025-11-18 17:15:10,610 - INFO - t_max proyectil A: 4.7537s
+2025-11-18 17:15:10,611 - INFO - Simulando 300 pasos desde t=0 hasta t=4.7061s
+2025-11-18 17:15:10,612 - INFO - Velocidad B calculada: u=9.9823, theta=13.8565°
+2025-11-18 17:15:10,612 - INFO - Componentes B: vx=9.6918, vy=2.3907
+2025-11-18 17:15:10,642 - INFO - B Lanzado en t=2.0147s, posB inicial: [0. 0.], velB: [9.69182171 2.39068092]
+2025-11-18 17:15:10,649 - INFO - Rango xB: [0.00, 24.94]
+2025-11-18 17:15:10,651 - INFO - Rango yB: [0.00, 0.35]
+2025-11-18 17:15:10,790 - INFO - Creando animación...
+2025-11-18 17:16:01,406 - INFO - Iniciando aplicación de simulación de proyectiles
+2025-11-18 17:16:05,052 - INFO - === INICIANDO SIMULACIÓN ===
+2025-11-18 17:16:05,052 - INFO - Parámetros entrada: D=50.0, h=10.0, v=30.0, phi=45.0°
+2025-11-18 17:16:05,053 - INFO - T=2.0s, tc(optimo)=4.7537s, u=56.4185m/s, theta=13.8514°
+2025-11-18 17:16:05,053 - INFO - t_max proyectil A: 4.7537s
+2025-11-18 17:16:05,054 - INFO - Simulando 300 pasos desde t=0 hasta t=4.7061s
+2025-11-18 17:16:05,054 - INFO - Velocidad B calculada: u=56.4185, theta=13.8514°
+2025-11-18 17:16:05,054 - INFO - Componentes B: vx=54.7778, vy=13.5068
+2025-11-18 17:16:05,074 - INFO - B Lanzado en t=2.0147s, posB inicial: [0. 0.], velB: [54.77781282 13.5068358 ]
+2025-11-18 17:16:05,079 - INFO - Rango xB: [0.00, 145.96]
+2025-11-18 17:16:05,079 - INFO - Rango yB: [0.00, 9.96]
+2025-11-18 17:16:05,206 - INFO - Creando animación...
+2025-11-18 17:16:33,909 - INFO - 
+============================================================
+2025-11-18 17:16:33,910 - INFO - CALCULANDO SOLUCIÓN ÓPTIMA
+2025-11-18 17:16:33,911 - INFO - ============================================================
+2025-11-18 17:16:33,912 - INFO - Parámetros de entrada: D=50.0, h=10.0, v=30.0, phi=45.00°, T=1.0
+2025-11-18 17:16:33,912 - INFO - t_max calculado: 4.7537s
+2025-11-18 17:16:33,914 - INFO - Intervalo de búsqueda: [1.0010, 4.7537]
+2025-11-18 17:16:33,916 - INFO - Resultados:
+2025-11-18 17:16:33,916 - INFO -   tc_optimo: 4.753686s
+2025-11-18 17:16:33,917 - INFO -   u_optimo: 44.201912m/s
+2025-11-18 17:16:33,918 - INFO -   theta_optimo: 24.616292°
+2025-11-18 17:16:33,918 - INFO - Solución guardada exitosamente
+2025-11-18 17:16:34,917 - INFO - === INICIANDO SIMULACIÓN ===
+2025-11-18 17:16:34,918 - INFO - Parámetros entrada: D=50.0, h=10.0, v=30.0, phi=45.0°
+2025-11-18 17:16:34,918 - INFO - T=1.0s, tc(optimo)=4.7537s, u=44.2019m/s, theta=24.6163°
+2025-11-18 17:16:34,919 - INFO - t_max proyectil A: 4.7537s
+2025-11-18 17:16:34,920 - INFO - Simulando 300 pasos desde t=0 hasta t=4.7061s
+2025-11-18 17:16:34,921 - INFO - Velocidad B calculada: u=44.2019, theta=24.6163°
+2025-11-18 17:16:34,921 - INFO - Componentes B: vx=40.1847, vy=18.4118
+2025-11-18 17:16:34,927 - INFO - B Lanzado en t=1.0073s, posB inicial: [0. 0.], velB: [40.1847411  18.41183454]
+2025-11-18 17:16:34,939 - INFO - Rango xB: [0.00, 151.19]
+2025-11-18 17:16:34,940 - INFO - Rango yB: [0.00, 16.69]
+2025-11-18 17:16:35,045 - INFO - Creando animación...
+2025-11-18 17:16:48,964 - INFO - Cerrando aplicación
+2025-11-18 17:35:39,191 - INFO - Iniciando aplicación de simulación de proyectiles
+2025-11-19 06:47:55,558 - INFO - 
+============================================================
+2025-11-19 06:47:55,558 - INFO - CALCULANDO SOLUCIÓN ÓPTIMA
+2025-11-19 06:47:55,558 - INFO - ============================================================
+2025-11-19 06:47:55,558 - INFO - Parámetros de entrada: D=50.0, h=10.0, v=30.0, phi=45.00°, T=2.0
+2025-11-19 06:47:55,559 - INFO - t_max calculado: 4.7537s
+2025-11-19 06:47:55,559 - INFO - Intervalo de búsqueda: [2.0010, 4.7537]
+2025-11-19 06:47:55,560 - INFO - Resultados:
+2025-11-19 06:47:55,560 - INFO -   tc_optimo: 4.753686s
+2025-11-19 06:47:55,560 - INFO -   u_optimo: 56.418467m/s
+2025-11-19 06:47:55,561 - INFO -   theta_optimo: 13.851397°
+2025-11-19 06:47:55,561 - INFO - Solución guardada exitosamente
+2025-11-19 06:48:00,169 - INFO - === INICIANDO SIMULACIÓN ===
+2025-11-19 06:48:00,170 - INFO - Parámetros entrada: D=50.0, h=10.0, v=30.0, phi=45.0°
+2025-11-19 06:48:00,170 - INFO - T=2.0s, tc(optimo)=4.7537s, u=56.4185m/s, theta=13.8514°
+2025-11-19 06:48:00,170 - INFO - t_max proyectil A: 4.7537s
+2025-11-19 06:48:00,171 - INFO - Simulando 300 pasos desde t=0 hasta t=4.7061s
+2025-11-19 06:48:00,171 - INFO - Velocidad B calculada: u=56.4185, theta=13.8514°
+2025-11-19 06:48:00,172 - INFO - Componentes B: vx=54.7778, vy=13.5068
+2025-11-19 06:48:00,223 - INFO - B Lanzado en t=2.0147s, posB inicial: [0. 0.], velB: [54.77781282 13.5068358 ]
+2025-11-19 06:48:00,229 - INFO - Rango xB: [0.00, 148.68]
+2025-11-19 06:48:00,230 - INFO - Rango yB: [0.00, 9.24]
+2025-11-19 06:48:00,519 - INFO - Creando animación...
+2025-11-19 06:48:19,268 - INFO - === INICIANDO SIMULACIÓN ===
+2025-11-19 06:48:19,269 - INFO - Parámetros entrada: D=50.0, h=10.0, v=30.0, phi=45.0°
+2025-11-19 06:48:19,269 - INFO - T=2.0s, tc(optimo)=4.7537s, u=56.4185m/s, theta=13.8514°
+2025-11-19 06:48:19,269 - INFO - t_max proyectil A: 4.7537s
+2025-11-19 06:48:19,270 - INFO - Simulando 300 pasos desde t=0 hasta t=4.7061s
+2025-11-19 06:48:19,270 - INFO - Velocidad B calculada: u=56.4185, theta=13.8514°
+2025-11-19 06:48:19,271 - INFO - Componentes B: vx=54.7778, vy=13.5068
+2025-11-19 06:48:19,274 - INFO - B Lanzado en t=2.0147s, posB inicial: [0. 0.], velB: [54.77781282 13.5068358 ]
+2025-11-19 06:48:19,277 - INFO - Rango xB: [0.00, 148.30]
+2025-11-19 06:48:19,278 - INFO - Rango yB: [0.00, 9.40]
+2025-11-19 06:48:19,498 - INFO - Creando animación...
+2025-11-19 06:48:34,573 - INFO - Cerrando aplicación
+2025-11-19 06:54:39,651 - INFO - Iniciando aplicación de simulación de proyectiles
+2025-11-19 06:54:56,045 - INFO - Cerrando aplicación
+2025-11-19 06:55:07,673 - INFO - Iniciando aplicación de simulación de proyectiles
+2025-11-19 06:55:43,072 - INFO - Cerrando aplicación
+2025-11-19 06:56:27,354 - INFO - Iniciando aplicación de simulación de proyectiles
+2025-11-19 06:56:27,539 - ERROR - Error crítico al iniciar la aplicación: 'InterfazSimulacionProyectiles' object has no attribute 'iniciar_simulacion_trayectorias'
+2025-11-19 06:56:38,607 - INFO - Iniciando aplicación de simulación de proyectiles
+2025-11-19 06:56:38,771 - ERROR - Error crítico al iniciar la aplicación: 'InterfazSimulacionProyectiles' object has no attribute 'iniciar_simulacion_trayectorias'
+2025-11-19 06:57:33,921 - INFO - Iniciando aplicación de simulación de proyectiles
+2025-11-19 06:57:47,515 - INFO - Cerrando aplicación
+2025-11-19 06:58:47,485 - INFO - Iniciando aplicación de simulación de proyectiles
+2025-11-19 06:58:50,518 - INFO - === INICIANDO SIMULACIÓN ===
+2025-11-19 06:58:50,694 - INFO - Simulando 250 pasos hasta t=4.706s
+2025-11-19 06:58:50,695 - INFO - Velocidad B: u=60.26, vx=58.44, vy=14.71
+2025-11-19 06:58:50,747 - INFO - B lanzado en t=2.003s
+2025-11-19 06:59:26,688 - INFO - === INICIANDO SIMULACIÓN ===
+2025-11-19 06:59:26,715 - INFO - Simulando 250 pasos hasta t=4.706s
+2025-11-19 06:59:26,716 - INFO - Velocidad B: u=60.26, vx=58.44, vy=14.71
+2025-11-19 06:59:26,720 - INFO - B lanzado en t=2.003s
+2025-11-19 07:00:38,395 - INFO - === INICIANDO SIMULACIÓN ===
+2025-11-19 07:00:38,423 - INFO - Simulando 250 pasos hasta t=3.568s
+2025-11-19 07:00:38,424 - INFO - Velocidad B: u=123.66, vx=123.23, vy=10.30
+2025-11-19 07:00:38,427 - INFO - B lanzado en t=2.006s
+2025-11-19 07:01:06,440 - INFO - Cerrando aplicación
