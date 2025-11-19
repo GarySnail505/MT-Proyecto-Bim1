@@ -311,3 +311,153 @@
 2025-11-19 07:00:38,424 - INFO - Velocidad B: u=123.66, vx=123.23, vy=10.30
 2025-11-19 07:00:38,427 - INFO - B lanzado en t=2.006s
 2025-11-19 07:01:06,440 - INFO - Cerrando aplicación
+2025-11-19 07:08:06,626 - INFO - Iniciando aplicación de simulación de proyectiles
+2025-11-19 07:08:09,257 - INFO - 
+============================================================
+2025-11-19 07:08:09,257 - INFO - CALCULANDO SOLUCIÓN ÓPTIMA
+2025-11-19 07:08:09,258 - INFO - ============================================================
+2025-11-19 07:08:09,258 - INFO - Parámetros de entrada: D=50.0, h=10.0, v=30.0, phi=45.00°, T=2.0
+2025-11-19 07:08:09,259 - INFO - t_max calculado: 4.7537s
+2025-11-19 07:08:09,259 - INFO - Intervalo de búsqueda: [2.0010, 4.7537]
+2025-11-19 07:08:09,261 - INFO - Resultados:
+2025-11-19 07:08:09,261 - INFO -   tc_optimo: 4.548903s
+2025-11-19 07:08:09,262 - INFO -   u_optimo: 60.264836m/s
+2025-11-19 07:08:09,262 - INFO -   theta_optimo: 14.125704°
+2025-11-19 07:08:09,265 - ERROR - Error en cálculo: 'NoneType' object is not subscriptable
+2025-11-19 07:08:18,858 - INFO - === INICIANDO SIMULACIÓN ===
+2025-11-19 07:08:18,926 - INFO - Simulando 250 pasos hasta t=4.706s
+2025-11-19 07:08:18,928 - INFO - Velocidad B: u=60.26, vx=58.44, vy=14.71
+2025-11-19 07:08:19,014 - INFO - B lanzado en t=2.003s
+2025-11-19 07:09:02,725 - INFO - Cerrando aplicación
+2025-11-19 07:09:40,086 - INFO - Iniciando aplicación de simulación de proyectiles
+2025-11-19 07:10:29,976 - INFO - === INICIANDO SIMULACIÓN ===
+2025-11-19 07:10:30,036 - INFO - Simulando 250 pasos hasta t=10.653s
+2025-11-19 07:10:30,038 - INFO - Velocidad B: u=50.26, vx=11.53, vy=48.92
+2025-11-19 07:10:30,101 - INFO - B lanzado en t=1.027s
+2025-11-19 07:10:56,343 - INFO - Cerrando aplicación
+2025-11-19 07:15:10,306 - INFO - Iniciando aplicación de simulación de proyectiles
+2025-11-19 07:15:12,908 - INFO - === INICIANDO SIMULACIÓN ===
+2025-11-19 07:15:12,968 - INFO - Simulando 250 pasos hasta t=4.706s
+2025-11-19 07:15:12,969 - INFO - Velocidad B: u=60.26, vx=58.44, vy=14.71
+2025-11-19 07:15:13,043 - INFO - B lanzado en t=2.003s
+2025-11-19 07:22:21,033 - INFO - Iniciando aplicación de simulación de proyectiles
+2025-11-19 07:22:39,622 - ERROR - Error en animación: Axis limits cannot be NaN or Inf
+2025-11-19 07:22:43,542 - INFO - 
+============================================================
+2025-11-19 07:22:43,543 - INFO - CALCULANDO SOLUCIÓN ÓPTIMA
+2025-11-19 07:22:43,544 - INFO - ============================================================
+2025-11-19 07:22:43,545 - INFO - Parámetros de entrada: D=50.0, h=10.0, v=30.0, phi=45.00°, T=1.0
+2025-11-19 07:22:43,546 - INFO - t_max calculado: 4.7537s
+2025-11-19 07:22:43,547 - INFO - Intervalo de búsqueda: [1.0010, 4.7537]
+2025-11-19 07:22:43,549 - INFO - Resultados:
+2025-11-19 07:22:43,550 - INFO -   tc_optimo: 4.753686s
+2025-11-19 07:22:43,550 - INFO -   u_optimo: infm/s
+2025-11-19 07:22:43,551 - INFO -   theta_optimo: 126.339245°
+2025-11-19 07:22:43,628 - INFO - Solución guardada exitosamente
+2025-11-19 07:22:46,849 - ERROR - Error en animación: Axis limits cannot be NaN or Inf
+2025-11-19 07:22:52,025 - ERROR - Error en animación: Axis limits cannot be NaN or Inf
+2025-11-19 07:22:58,094 - INFO - 
+============================================================
+2025-11-19 07:22:58,095 - INFO - CALCULANDO SOLUCIÓN ÓPTIMA
+2025-11-19 07:22:58,096 - INFO - ============================================================
+2025-11-19 07:22:58,097 - INFO - Parámetros de entrada: D=50.0, h=10.0, v=30.0, phi=70.00°, T=1.0
+2025-11-19 07:22:58,097 - INFO - t_max calculado: 6.0825s
+2025-11-19 07:22:58,098 - INFO - Intervalo de búsqueda: [1.0010, 6.0825]
+2025-11-19 07:22:58,101 - INFO - Resultados:
+2025-11-19 07:22:58,102 - INFO -   tc_optimo: 4.873007s
+2025-11-19 07:22:58,103 - INFO -   u_optimo: 26.975077m/s
+2025-11-19 07:22:58,104 - INFO -   theta_optimo: 89.999998°
+2025-11-19 07:22:58,105 - INFO - Solución guardada exitosamente
+2025-11-19 07:24:20,039 - INFO - 
+============================================================
+2025-11-19 07:24:20,040 - INFO - CALCULANDO SOLUCIÓN ÓPTIMA
+2025-11-19 07:24:20,041 - INFO - ============================================================
+2025-11-19 07:24:20,041 - INFO - Parámetros de entrada: D=100.0, h=10.0, v=70.0, phi=70.00°, T=1.0
+2025-11-19 07:24:20,042 - INFO - t_max calculado: 13.5608s
+2025-11-19 07:24:20,043 - INFO - Intervalo de búsqueda: [1.0010, 13.5608]
+2025-11-19 07:24:20,045 - INFO - Resultados:
+2025-11-19 07:24:20,046 - INFO -   tc_optimo: 13.560836s
+2025-11-19 07:24:20,047 - INFO -   u_optimo: infm/s
+2025-11-19 07:24:20,048 - INFO -   theta_optimo: 106.188483°
+2025-11-19 07:24:20,049 - INFO - Solución guardada exitosamente
+2025-11-19 07:24:25,614 - ERROR - Error en animación: Axis limits cannot be NaN or Inf
+2025-11-19 07:24:31,073 - ERROR - Error en animación: Axis limits cannot be NaN or Inf
+2025-11-19 07:26:43,056 - ERROR - Error en animación: Axis limits cannot be NaN or Inf
+2025-11-19 07:27:32,736 - ERROR - Error en animación: Axis limits cannot be NaN or Inf
+2025-11-19 07:27:56,478 - ERROR - Error en animación: Axis limits cannot be NaN or Inf
+2025-11-19 07:29:38,006 - ERROR - Error en animación: Axis limits cannot be NaN or Inf
+2025-11-19 07:29:39,954 - INFO - Cerrando aplicación
+2025-11-19 07:35:09,325 - INFO - Iniciando aplicación de simulación de proyectiles
+2025-11-19 07:35:23,533 - ERROR - Error en animación: Axis limits cannot be NaN or Inf
+2025-11-19 07:36:14,207 - ERROR - Error en animación: Axis limits cannot be NaN or Inf
+2025-11-19 07:40:18,580 - INFO - 
+============================================================
+2025-11-19 07:40:18,581 - INFO - CALCULANDO SOLUCIÓN ÓPTIMA
+2025-11-19 07:40:18,582 - INFO - ============================================================
+2025-11-19 07:40:18,583 - INFO - Parámetros de entrada: D=250.0, h=50.0, v=40.0, phi=45.00°, T=1.0
+2025-11-19 07:40:18,584 - INFO - t_max calculado: 7.1851s
+2025-11-19 07:40:18,585 - INFO - Intervalo de búsqueda: [1.0010, 7.1851]
+2025-11-19 07:40:18,588 - INFO - Resultados:
+2025-11-19 07:40:18,589 - INFO -   tc_optimo: 7.113450s
+2025-11-19 07:40:18,590 - INFO -   u_optimo: 31.505260m/s
+2025-11-19 07:40:18,592 - INFO -   theta_optimo: 75.322757°
+2025-11-19 07:40:18,594 - INFO - Solución guardada exitosamente
+2025-11-19 07:40:23,021 - INFO - Cerrando aplicación
+2025-11-19 07:42:42,722 - INFO - Iniciando aplicación de simulación de proyectiles
+2025-11-19 07:42:45,975 - INFO - Cerrando aplicación
+2025-11-19 07:43:08,883 - INFO - Iniciando aplicación de simulación de proyectiles
+2025-11-19 07:43:35,226 - INFO - Cerrando aplicación
+2025-11-19 07:45:02,479 - INFO - Iniciando aplicación de simulación de proyectiles
+2025-11-19 07:45:05,647 - INFO - Cerrando aplicación
+2025-11-19 07:45:21,217 - INFO - Iniciando aplicación de simulación de proyectiles
+2025-11-19 07:45:40,077 - ERROR - Error en animación: Axis limits cannot be NaN or Inf
+2025-11-19 07:46:13,005 - ERROR - Error en animación: Axis limits cannot be NaN or Inf
+2025-11-19 07:46:49,602 - ERROR - Error en animación: Axis limits cannot be NaN or Inf
+2025-11-19 07:46:53,422 - INFO - 
+============================================================
+2025-11-19 07:46:53,423 - INFO - CALCULANDO SOLUCIÓN ÓPTIMA
+2025-11-19 07:46:53,424 - INFO - ============================================================
+2025-11-19 07:46:53,424 - INFO - Parámetros de entrada: D=100.0, h=10.0, v=30.0, phi=35.00°, T=2.0
+2025-11-19 07:46:53,426 - INFO - t_max calculado: 4.0158s
+2025-11-19 07:46:53,426 - INFO - Intervalo de búsqueda: [2.0010, 4.0158]
+2025-11-19 07:46:53,429 - INFO - Resultados:
+2025-11-19 07:46:53,430 - INFO -   tc_optimo: 3.876279s
+2025-11-19 07:46:53,431 - INFO -   u_optimo: 11.093796m/s
+2025-11-19 07:46:53,432 - INFO -   theta_optimo: 76.831077°
+2025-11-19 07:46:53,433 - INFO - Solución guardada exitosamente
+2025-11-19 07:47:33,168 - ERROR - Error en animación: Axis limits cannot be NaN or Inf
+2025-11-19 07:47:39,802 - INFO - Cerrando aplicación
+2025-11-19 08:07:44,249 - INFO - Iniciando aplicación de simulación de proyectiles
+2025-11-19 08:07:48,927 - INFO - Cerrando aplicación
+2025-11-19 08:10:38,933 - INFO - Iniciando aplicación de simulación de proyectiles
+2025-11-19 08:11:20,511 - INFO - Cerrando aplicación
+2025-11-19 08:11:50,731 - INFO - Iniciando aplicación de simulación de proyectiles
+2025-11-19 08:11:53,197 - INFO - 
+============================================================
+2025-11-19 08:11:53,197 - INFO - CALCULANDO SOLUCIÓN ÓPTIMA
+2025-11-19 08:11:53,198 - INFO - ============================================================
+2025-11-19 08:11:53,198 - INFO - Parámetros de entrada: D=50.0, h=10.0, v=30.0, phi=45.00°, T=2.0
+2025-11-19 08:11:53,199 - INFO - t_max calculado: 4.7537s
+2025-11-19 08:11:53,199 - INFO - Intervalo de búsqueda: [2.0010, 4.7537]
+2025-11-19 08:11:53,200 - INFO - Resultados:
+2025-11-19 08:11:53,201 - INFO -   tc_optimo: 4.753686s
+2025-11-19 08:11:53,201 - INFO -   u_optimo: infm/s
+2025-11-19 08:11:53,201 - INFO -   theta_optimo: 143.811990°
+2025-11-19 08:11:53,205 - ERROR - Error en cálculo: 'NoneType' object is not subscriptable
+2025-11-19 08:12:02,780 - INFO - 
+============================================================
+2025-11-19 08:12:02,781 - INFO - CALCULANDO SOLUCIÓN ÓPTIMA
+2025-11-19 08:12:02,782 - INFO - ============================================================
+2025-11-19 08:12:02,783 - INFO - Parámetros de entrada: D=50.0, h=10.0, v=30.0, phi=45.00°, T=2.0
+2025-11-19 08:12:02,784 - INFO - t_max calculado: 4.7537s
+2025-11-19 08:12:02,784 - INFO - Intervalo de búsqueda: [2.0010, 4.7537]
+2025-11-19 08:12:02,786 - INFO - Resultados:
+2025-11-19 08:12:02,786 - INFO -   tc_optimo: 4.753687s
+2025-11-19 08:12:02,787 - INFO -   u_optimo: infm/s
+2025-11-19 08:12:02,788 - INFO -   theta_optimo: 143.811995°
+2025-11-19 08:12:02,790 - ERROR - Error en cálculo: 'NoneType' object is not subscriptable
+2025-11-19 08:12:11,275 - ERROR - Error en animación: Axis limits cannot be NaN or Inf
+2025-11-19 08:12:42,261 - INFO - Cerrando aplicación
+2025-11-19 08:13:00,049 - INFO - Iniciando aplicación de simulación de proyectiles
+2025-11-19 08:13:05,829 - ERROR - Error en animación: Axis limits cannot be NaN or Inf
+2025-11-19 08:13:07,591 - INFO - Cerrando aplicación
