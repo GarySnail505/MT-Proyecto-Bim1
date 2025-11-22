@@ -30,14 +30,6 @@ class InterfazSimulacionProyectiles:
             elif event.num == 5:
                 self.canvas.yview_scroll(1, "units")
     
-    def _bind_mouse_wheel(self, widget):
-        """Vincula eventos de scroll del mouse a un widget y sus hijos recursivamente."""
-        widget.bind("<MouseWheel>", self._on_mousewheel)
-        widget.bind("<Button-4>", self._on_mousewheel)
-        widget.bind("<Button-5>", self._on_mousewheel)
-        for child in widget.winfo_children():
-            self._bind_mouse_wheel(child)
-    
     def _configurar_scroll(self, event=None):
         """Actualiza la región de scroll del canvas."""
         self.canvas.configure(scrollregion=self.canvas.bbox("all"))
@@ -70,8 +62,10 @@ class InterfazSimulacionProyectiles:
         # Configurar actualización automática de la región de scroll
         marco_principal.bind("<Configure>", self._configurar_scroll)
         
-        # Propagar eventos de scroll a canvas y widgets hijos
-        self._bind_mouse_wheel(self.canvas)
+        # Vincular eventos de scroll del mouse al canvas
+        self.canvas.bind("<MouseWheel>", self._on_mousewheel)  # Windows/Mac
+        self.canvas.bind("<Button-4>", self._on_mousewheel)    # Linux scroll up
+        self.canvas.bind("<Button-5>", self._on_mousewheel)    # Linux scroll down
         
         # Título
         titulo_label = ttk.Label(marco_principal, text="Simulación de Colisión de Proyectiles", 
