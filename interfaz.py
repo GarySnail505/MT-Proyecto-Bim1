@@ -18,21 +18,41 @@ class InterfazSimulacionProyectiles:
         
         self.crear_widgets()
         
+    def _on_mousewheel(self, event):
+        """Maneja eventos de scroll del mouse de forma multiplataforma."""
+        if event.delta:
+            # Windows y macOS
+            self.canvas.yview_scroll(int(-1*(event.delta/120)), "units")
+        else:
+            # Linux - fallback
+            if event.num == 4:
+                self.canvas.yview_scroll(-1, "units")
+            elif event.num == 5:
+                self.canvas.yview_scroll(1, "units")
+    
+    def _bind_mouse_wheel(self, widget):
+        """Vincula eventos de scroll del mouse a un widget y sus hijos recursivamente."""
+        widget.bind("<MouseWheel>", self._on_mousewheel)
+        widget.bind("<Button-4>", self._on_mousewheel)
+        widget.bind("<Button-5>", self._on_mousewheel)
+        for child in widget.winfo_children():
+            self._bind_mouse_wheel(child)
+        
     def crear_widgets(self):
         """Crea todos los elementos de la interfaz."""
         # Crear un canvas con scrollbar para hacer la interfaz desplazable
-        canvas = tk.Canvas(self.ventana_principal)
-        scrollbar_vertical = ttk.Scrollbar(self.ventana_principal, orient="vertical", command=canvas.yview)
-        scrollbar_horizontal = ttk.Scrollbar(self.ventana_principal, orient="horizontal", command=canvas.xview)
+        self.canvas = tk.Canvas(self.ventana_principal)
+        scrollbar_vertical = ttk.Scrollbar(self.ventana_principal, orient="vertical", command=self.canvas.yview)
+        scrollbar_horizontal = ttk.Scrollbar(self.ventana_principal, orient="horizontal", command=self.canvas.xview)
         
         # Frame que contendrá todos los widgets
-        marco_principal = ttk.Frame(canvas, padding="10")
+        marco_principal = ttk.Frame(self.canvas, padding="10")
         
         # Configurar el canvas
-        canvas.configure(yscrollcommand=scrollbar_vertical.set, xscrollcommand=scrollbar_horizontal.set)
+        self.canvas.configure(yscrollcommand=scrollbar_vertical.set, xscrollcommand=scrollbar_horizontal.set)
         
         # Posicionar canvas y scrollbars
-        canvas.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
+        self.canvas.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
         scrollbar_vertical.grid(row=0, column=1, sticky=(tk.N, tk.S))
         scrollbar_horizontal.grid(row=1, column=0, sticky=(tk.W, tk.E))
         
@@ -41,41 +61,21 @@ class InterfazSimulacionProyectiles:
         self.ventana_principal.grid_columnconfigure(0, weight=1)
         
         # Crear ventana en el canvas
-        canvas.create_window((0, 0), window=marco_principal, anchor="nw")
+        self.canvas.create_window((0, 0), window=marco_principal, anchor="nw")
         
         # Función para actualizar la región de scroll
         def configurar_scroll(event=None):
-            canvas.configure(scrollregion=canvas.bbox("all"))
+            self.canvas.configure(scrollregion=self.canvas.bbox("all"))
         
         marco_principal.bind("<Configure>", configurar_scroll)
         
         # Configurar scroll con la rueda del ratón
-        def _on_mousewheel(event):
-            # Soporte multiplataforma para la rueda del ratón
-            if event.delta:
-                # Windows y macOS
-                canvas.yview_scroll(int(-1*(event.delta/120)), "units")
-            else:
-                # Fallback
-                if event.num == 4:
-                    canvas.yview_scroll(-1, "units")
-                elif event.num == 5:
-                    canvas.yview_scroll(1, "units")
-        
-        # Vincular eventos de scroll solo al canvas y sus widgets hijos
-        canvas.bind("<MouseWheel>", _on_mousewheel)  # Windows/Mac
-        canvas.bind("<Button-4>", _on_mousewheel)    # Linux scroll up
-        canvas.bind("<Button-5>", _on_mousewheel)    # Linux scroll down
+        self.canvas.bind("<MouseWheel>", self._on_mousewheel)  # Windows/Mac
+        self.canvas.bind("<Button-4>", self._on_mousewheel)    # Linux scroll up
+        self.canvas.bind("<Button-5>", self._on_mousewheel)    # Linux scroll down
         
         # Propagar eventos de scroll a widgets hijos
-        def _bind_mouse_wheel(widget):
-            widget.bind("<MouseWheel>", _on_mousewheel)
-            widget.bind("<Button-4>", _on_mousewheel)
-            widget.bind("<Button-5>", _on_mousewheel)
-            for child in widget.winfo_children():
-                _bind_mouse_wheel(child)
-        
-        _bind_mouse_wheel(marco_principal)
+        self._bind_mouse_wheel(marco_principal)
         
         # Título
         titulo_label = ttk.Label(marco_principal, text="Simulación de Colisión de Proyectiles", 
