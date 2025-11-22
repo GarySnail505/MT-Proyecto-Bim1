@@ -41,7 +41,7 @@ class InterfazSimulacionProyectiles:
         self.ventana_principal.grid_columnconfigure(0, weight=1)
         
         # Crear ventana en el canvas
-        canvas_window = canvas.create_window((0, 0), window=marco_principal, anchor="nw")
+        canvas.create_window((0, 0), window=marco_principal, anchor="nw")
         
         # Función para actualizar la región de scroll
         def configurar_scroll(event=None):
@@ -51,20 +51,31 @@ class InterfazSimulacionProyectiles:
         
         # Configurar scroll con la rueda del ratón
         def _on_mousewheel(event):
-            canvas.yview_scroll(int(-1*(event.delta/120)), "units")
+            # Soporte multiplataforma para la rueda del ratón
+            if event.delta:
+                # Windows y macOS
+                canvas.yview_scroll(int(-1*(event.delta/120)), "units")
+            else:
+                # Fallback
+                if event.num == 4:
+                    canvas.yview_scroll(-1, "units")
+                elif event.num == 5:
+                    canvas.yview_scroll(1, "units")
         
-        # Vincular eventos de scroll del mouse
-        canvas.bind_all("<MouseWheel>", _on_mousewheel)
+        # Vincular eventos de scroll solo al canvas y sus widgets hijos
+        canvas.bind("<MouseWheel>", _on_mousewheel)  # Windows/Mac
+        canvas.bind("<Button-4>", _on_mousewheel)    # Linux scroll up
+        canvas.bind("<Button-5>", _on_mousewheel)    # Linux scroll down
         
-        # Para Linux
-        def _on_mouse_button_4(event):
-            canvas.yview_scroll(-1, "units")
+        # Propagar eventos de scroll a widgets hijos
+        def _bind_mouse_wheel(widget):
+            widget.bind("<MouseWheel>", _on_mousewheel)
+            widget.bind("<Button-4>", _on_mousewheel)
+            widget.bind("<Button-5>", _on_mousewheel)
+            for child in widget.winfo_children():
+                _bind_mouse_wheel(child)
         
-        def _on_mouse_button_5(event):
-            canvas.yview_scroll(1, "units")
-        
-        canvas.bind_all("<Button-4>", _on_mouse_button_4)
-        canvas.bind_all("<Button-5>", _on_mouse_button_5)
+        _bind_mouse_wheel(marco_principal)
         
         # Título
         titulo_label = ttk.Label(marco_principal, text="Simulación de Colisión de Proyectiles", 
