@@ -19,8 +19,51 @@ class InterfazSimulacionProyectiles:
         self.crear_widgets()
         
     def crear_widgets(self):
-        """Crea todos los elementos de la interfaz."""
-        marco_principal = ttk.Frame(self.ventana_principal, padding="10")
+        """Crea todos los elementos de la interfaz con Scrollbar."""
+        
+        # --- CONFIGURACIÓN DEL SCROLLBAR GENERAL ---
+        # Creamos un frame contenedor principal
+        main_container = ttk.Frame(self.ventana_principal)
+        main_container.pack(fill=tk.BOTH, expand=True)
+
+        # Creamos el Canvas (el área dibujable que se puede scrollear)
+        my_canvas = tk.Canvas(main_container)
+        my_canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+
+        # Creamos el Scrollbar vinculado al Canvas
+        my_scrollbar = ttk.Scrollbar(main_container, orient=tk.VERTICAL, command=my_canvas.yview)
+        my_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
+        # Configuramos el Canvas para usar el Scrollbar
+        my_canvas.configure(yscrollcommand=my_scrollbar.set)
+        
+        # Creamos un Frame DENTRO del Canvas (este será el que contenga tus widgets)
+        scrollable_frame = ttk.Frame(my_canvas)
+
+        # Función para actualizar la región de scroll cuando el frame cambia de tamaño
+        scrollable_frame.bind(
+            "<Configure>",
+            lambda e: my_canvas.configure(
+                scrollregion=my_canvas.bbox("all")
+            )
+        )
+
+        # Dibujamos el frame dentro del canvas
+        my_canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
+
+        # Habilitar scroll con la rueda del ratón (MouseWheel)
+        def _on_mousewheel(event):
+            my_canvas.yview_scroll(int(-1*(event.delta/120)), "units")
+        
+        # Bind para Windows/MacOS
+        my_canvas.bind_all("<MouseWheel>", _on_mousewheel)
+        # Bind para Linux (Button-4 y Button-5)
+        my_canvas.bind_all("<Button-4>", lambda e: my_canvas.yview_scroll(-1, "units"))
+        my_canvas.bind_all("<Button-5>", lambda e: my_canvas.yview_scroll(1, "units"))
+
+        # --- AHORA AGREGAMOS TUS WIDGETS AL 'scrollable_frame' ---
+        
+        marco_principal = ttk.Frame(scrollable_frame, padding="10")
         marco_principal.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
         
         # Título
@@ -145,11 +188,12 @@ class InterfazSimulacionProyectiles:
         marco_texto.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
         
         self.texto_resultados = tk.Text(marco_texto, height=12, width=85)
-        scrollbar = ttk.Scrollbar(marco_texto, orient="vertical", command=self.texto_resultados.yview)
-        self.texto_resultados.configure(yscrollcommand=scrollbar.set)
+        # Scrollbar interno para el área de texto
+        scrollbar_texto = ttk.Scrollbar(marco_texto, orient="vertical", command=self.texto_resultados.yview)
+        self.texto_resultados.configure(yscrollcommand=scrollbar_texto.set)
         
         self.texto_resultados.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
-        scrollbar.grid(row=0, column=1, sticky=(tk.N, tk.S))
+        scrollbar_texto.grid(row=0, column=1, sticky=(tk.N, tk.S))
         
         # Inicializar escenarios
         self.definir_escenarios()
@@ -157,8 +201,6 @@ class InterfazSimulacionProyectiles:
 
     def definir_escenarios(self):
         """Define una lista UNIFICADA de escenarios para ambos métodos."""
-        # Lista única para que el menú no cambie al alternar métodos
-        # Estos escenarios han sido calculados para ser estables en ambos algoritmos
         self.escenarios_unificados = [
             "1. Estándar (Distancia Segura) - Muy Estable",
             "2. Tiro desde Altura (h=50m) - Preciso", 
@@ -169,17 +211,11 @@ class InterfazSimulacionProyectiles:
         ]
 
     def actualizar_escenarios(self):
-        """
-        Actualiza el combobox.
-        Usa siempre la lista unificada, sin importar el método.
-        """
+        """Actualiza el combobox."""
         self.combo_escenarios['values'] = self.escenarios_unificados
-        
-        # Si no hay selección (inicio), seleccionar el primero
         if self.combo_escenarios.current() == -1:
             self.combo_escenarios.current(0)
         
-        # Gestionar visibilidad del campo 'a'
         if "Relación 3:1" in self.combo_escenarios.get():
             self.label_a.grid()
             self.entrada_a.grid()
@@ -197,7 +233,6 @@ class InterfazSimulacionProyectiles:
     def cargar_escenario_seleccionado(self):
         """Carga el escenario seleccionado en el combobox."""
         seleccion_texto = self.combo_escenarios.get()
-        
         if "Relación 3:1" in seleccion_texto:
             try:
                 a = float(self.entrada_a.get())
@@ -209,45 +244,24 @@ class InterfazSimulacionProyectiles:
                 messagebox.showerror("Error", "Ingrese un valor numérico válido para 'a'")
         else:
             try:
-                # Extraer el número al inicio del string
                 numero = int(seleccion_texto.split(".")[0])
-                # El método ya no importa para cargar valores, son universales
                 self.cargar_escenario_estandar(numero, None)
             except:
                 messagebox.showerror("Error", "No se pudo cargar el escenario")
 
     def cargar_escenario_estandar(self, numero, metodo):
-        """
-        Carga el escenario seleccionado usando valores UNIFICADOS y SEGUROS.
-        Garantiza estabilidad tanto para Secante como para Sección Dorada.
-        """
+        """Carga el escenario seleccionado usando valores UNIFICADOS y SEGUROS."""
         self.limpiar_entradas()
-        
-        # Diccionario ÚNICO de escenarios Físicamente estables
         escenarios_data = {
-            # 1. Estándar: D=120 evita que A cruce x=0 antes del impacto.
             1: {"D": "120", "h": "20", "v": "25", "phi": "45", "T": "2.0", "desc": "Estándar (Distancia Segura)"},
-            
-            # 2. Altura: T bajo para interceptar antes de ganar velocidad excesiva.
             2: {"D": "90", "h": "50", "v": "20", "phi": "30", "T": "1.0", "desc": "Tiro desde Altura"},
-            
-            # 3. Lejano: Velocidad media-alta, D muy grande.
             3: {"D": "150", "h": "10", "v": "35", "phi": "50", "T": "2.5", "desc": "Larga Distancia"},
-            
-            # 4. Rápido: Ángulo 60, intercepción muy temprana.
             4: {"D": "60", "h": "15", "v": "25", "phi": "60", "T": "0.5", "desc": "Intercepción Rápida"},
-            
-            # 5. Ángulo Alto (CORREGIDO):
-            # Se redujo v a 28 y phi a 70 para mantener la altura controlada y u < 400.
             5: {"D": "50", "h": "10", "v": "28", "phi": "70", "T": "1.5", "desc": "Caída Vertical (Controlada)"},
         }
-        
-        if numero not in escenarios_data: 
-            numero = 1
-        
+        if numero not in escenarios_data: numero = 1
         data = escenarios_data[numero]
         
-        # Cargar valores
         self.entrada_D.insert(0, data["D"])
         self.entrada_h.insert(0, data["h"])
         self.entrada_v.insert(0, data["v"])
@@ -257,7 +271,6 @@ class InterfazSimulacionProyectiles:
         self.entrada_dt.insert(0, "0.05")
         self.entrada_factor_vel.insert(0, "2.0")
         
-        # Mensaje informativo
         self.texto_resultados.delete(1.0, tk.END)
         self.texto_resultados.insert(tk.END, f"✅ {data['desc']} cargado.\n")
         self.texto_resultados.insert(tk.END, f"🔄 Valores unificados para ambos métodos.\n")
@@ -265,16 +278,10 @@ class InterfazSimulacionProyectiles:
 
     def cargar_escenario_relacion_3_1(self, a):
         """Genera parámetros que garantizan colisión en x≈3a, y≈a."""
-        D = 3 * a + 12 
-        h = a + 10
+        D, h = 3 * a + 12, a + 10
         v = np.sqrt(2 * self.g * a) * 1.6 
-        phi = 48
-        T = np.sqrt(2 * a / self.g) * 0.35
-        
-        D = max(D, 18)
-        h = max(h, 8)
-        v = max(v, 15)
-        T = max(T, 0.25)
+        phi, T = 48, np.sqrt(2 * a / self.g) * 0.35
+        D, h, v, T = max(D, 18), max(h, 8), max(v, 15), max(T, 0.25)
         
         self.limpiar_entradas()
         self.entrada_D.insert(0, f"{D:.1f}")
@@ -319,74 +326,42 @@ class InterfazSimulacionProyectiles:
         """Método de la Secante con salvaguardas robustas."""
         def derivada_aprox(t):
             h_step = 1e-5
-            if t - h_step <= a or t + h_step >= b:
-                return float('inf')
-            
+            if t - h_step <= a or t + h_step >= b: return float('inf')
             f_mas = func(t + h_step, *args)
             f_menos = func(t - h_step, *args)
-            
-            if not (np.isfinite(f_mas) and np.isfinite(f_menos)):
-                return float('inf')
-            
+            if not (np.isfinite(f_mas) and np.isfinite(f_menos)): return float('inf')
             return (f_mas - f_menos) / (2 * h_step)
 
-        # Inicialización centrada para evitar extremos peligrosos
-        x0 = a + (b - a) * 0.3
-        x1 = a + (b - a) * 0.7
-        
+        x0, x1 = a + (b - a) * 0.3, a + (b - a) * 0.7
         f0 = derivada_aprox(x0)
         
         for i in range(max_iter):
             f1 = derivada_aprox(x1)
+            if not np.isfinite(f1) or not np.isfinite(f0): return (x0 + x1) / 2
+            if abs(f1 - f0) < 1e-12: break
+            if abs(f1 - f0) < 1e-15: return x1
             
-            # Si la derivada se rompe, regresamos al promedio seguro
-            if not np.isfinite(f1) or not np.isfinite(f0):
-                return (x0 + x1) / 2
+            try: x_new = x1 - f1 * (x1 - x0) / (f1 - f0)
+            except ZeroDivisionError: x_new = (a + b) / 2
             
-            if abs(f1 - f0) < 1e-12: 
-                break
-            
-            if abs(f1 - f0) < 1e-15:
-                return x1
-            
-            try:
-                x_new = x1 - f1 * (x1 - x0) / (f1 - f0)
-            except ZeroDivisionError:
-                x_new = (a + b) / 2
-            
-            # Si la secante dispara fuera del rango (común en funciones asintóticas), resetear
-            if x_new < a or x_new > b:
-                x_new = (a + b) / 2
-            
-            if abs(x_new - x1) < tol:
-                return x_new
-            
-            x0, x1 = x1, x_new
-            f0 = f1
-        
+            if x_new < a or x_new > b: x_new = (a + b) / 2
+            if abs(x_new - x1) < tol: return x_new
+            x0, x1, f0 = x1, x_new, f1
         return x1
 
     def calcular_solucion_optima(self):
         """Calcula la solución óptima usando el método seleccionado."""
         entradas = self.validar_entradas()
-        if entradas is None:
-            return
+        if entradas is None: return
         
         D, h, v, phi, T, g, sigma, dt, factor_vel = entradas
-        
-        # Encontrar t_max
         t_max = calculos.encontrar_t_max_proyectil_A(h, v, phi, g)
         if t_max is None or t_max <= 0:
             messagebox.showerror("Error", "No se pudo calcular t_max válido.")
             return
         
-        # --- CORRECCIÓN CRÍTICA DE INTERVALO ---
-        # Margen de 0.1s post-lanzamiento para evitar la asíntota vertical en t=T
         margen_inf = 0.1
-        a = T + margen_inf
-        
-        # Búsqueda hasta el 95% del vuelo (antes 85%, lo que causaba fallos en tiros bajos)
-        b = t_max * 0.95  
+        a, b = T + margen_inf, t_max * 0.95
         
         if b <= a:
             messagebox.showerror("Error", f"Intervalo inválido: T={T:.2f} es muy cercano a t_max={t_max:.2f}")
@@ -394,15 +369,13 @@ class InterfazSimulacionProyectiles:
         
         args = (D, h, v, phi, T, g)
         metodo_seleccionado = self.variable_metodo.get()
-        
         tiempo_inicio = time.time()
+        
         try:
             if metodo_seleccionado == "golden":
-                nombre_metodo = "Sección Dorada"
-                tc_optimo = calculos.minimizacion_seccion_dorada(calculos.funcion_velocidad_u, a, b, args)
+                nombre_metodo, tc_optimo = "Sección Dorada", calculos.minimizacion_seccion_dorada(calculos.funcion_velocidad_u, a, b, args)
             else:
-                nombre_metodo = "Secante"
-                tc_optimo = self.minimizacion_metodo_secante_corregida(calculos.funcion_velocidad_u, a, b, args)
+                nombre_metodo, tc_optimo = "Secante", self.minimizacion_metodo_secante_corregida(calculos.funcion_velocidad_u, a, b, args)
         except Exception as e:
             messagebox.showerror("Error", f"Error en optimización: {e}")
             return
@@ -415,19 +388,14 @@ class InterfazSimulacionProyectiles:
         
         u_optimo = calculos.funcion_velocidad_u(tc_optimo, D, h, v, phi, T, g)
         theta_optimo = calculos.funcion_angulo_theta(tc_optimo, D, h, v, phi, T, g)
-        
-        # Límite de velocidad unificado
         limite_u = 450 
         
         if not np.isfinite(u_optimo) or u_optimo > limite_u:
-            messagebox.showerror("Error", 
-                               f"Velocidad u excesiva ({u_optimo:.1f} m/s).\n"
-                               "La intercepción requiere demasiada energía para este escenario.")
+            messagebox.showerror("Error", f"Velocidad u excesiva ({u_optimo:.1f} m/s).")
             return
         
         x_col, y_col = calculos.posicion_proyectil_A(tc_optimo, D, h, v, phi, g)
         
-        # Mostrar resultados
         self.texto_resultados.delete(1.0, tk.END)
         self.texto_resultados.insert(tk.END, f"=== SOLUCIÓN ÓPTIMA ===\n")
         self.texto_resultados.insert(tk.END, f"Método: {nombre_metodo}\n")
@@ -435,7 +403,6 @@ class InterfazSimulacionProyectiles:
         self.texto_resultados.insert(tk.END, f"Tiempo de colisión (tc): {tc_optimo:.6f} s\n")
         self.texto_resultados.insert(tk.END, f"Velocidad inicial B (u): {u_optimo:.6f} m/s\n")
         self.texto_resultados.insert(tk.END, f"Ángulo de lanzamiento B (θ): {np.degrees(theta_optimo):.6f}°\n\n")
-        
         self.texto_resultados.insert(tk.END, f"Posición de colisión teórica:\n")
         self.texto_resultados.insert(tk.END, f"  x = {x_col:.6f} m\n")
         self.texto_resultados.insert(tk.END, f"  y = {y_col:.6f} m\n")
@@ -445,13 +412,10 @@ class InterfazSimulacionProyectiles:
                 a_val = float(self.entrada_a.get())
                 ratio = x_col / y_col if y_col != 0 else float('inf')
                 self.texto_resultados.insert(tk.END, f"\n📊 Relación x/y: {ratio:.3f} (Objetivo: ~3.0)\n")
-            except:
-                pass
+            except: pass
         
-        if y_col > 10:
-            self.texto_resultados.insert(tk.END, f"\n✅ Altura válida (Y > 10m)\n")
-        else:
-            self.texto_resultados.insert(tk.END, f"\n⚠️  Altura baja (Y ≤ 10m)\n")
+        # --- MODIFICACIÓN: Ya no hay advertencias de altura, solo información ---
+        self.texto_resultados.insert(tk.END, f"\n📍 Altura de impacto: {y_col:.2f} m\n")
         
         self.solucion_calculada = {
             'D': D, 'h': h, 'v': v, 'phi': phi, 'T': T,
@@ -466,55 +430,30 @@ class InterfazSimulacionProyectiles:
             messagebox.showwarning("Advertencia", "Primero calcule la solución óptima.")
             return
         
-        D = self.solucion_calculada['D']
-        h = self.solucion_calculada['h']
-        v = self.solucion_calculada['v']
-        phi = self.solucion_calculada['phi']
-        g = self.solucion_calculada['g']
-        tc = self.solucion_calculada['tc']
-        
-        x_col, y_col = calculos.posicion_proyectil_A(tc, D, h, v, phi, g)
-        
-        if y_col <= 5: # Advertencia solo si es extremadamente bajo
-            respuesta = messagebox.askyesno(
-                "Advertencia", 
-                f"La altura de colisión teórica es muy baja ({y_col:.1f}m).\n"
-                "¿Desea continuar con la simulación?"
-            )
-            if not respuesta:
-                return
-        
+        # --- MODIFICACIÓN: Se eliminaron las restricciones y advertencias de altura ---
+        # Ahora la simulación arranca directamente sin preguntar, sea cual sea la altura.
         simulacion.simular_y_animar_trayectorias(self.solucion_calculada)
     
     def comparar_metodos_numericos(self):
         """Compara ambos métodos numéricos."""
         entradas = self.validar_entradas()
-        if entradas is None:
-            return
+        if entradas is None: return
         
         D, h, v, phi, T, g, sigma, dt, factor_vel = entradas
-        
         t_max = calculos.encontrar_t_max_proyectil_A(h, v, phi, g)
         if t_max is None or t_max <= 0:
             messagebox.showerror("Error", "No se pudo calcular t_max.")
             return
         
-        # Intervalo seguro unificado
-        a = T + 0.1
-        b = t_max * 0.95
-        
+        a, b = T + 0.1, t_max * 0.95
         if b <= a:
             messagebox.showerror("Error", "Intervalo inválido.")
             return
         
         args = (D, h, v, phi, T, g)
-        
-        metodos = [
-            ("Sección Dorada", calculos.minimizacion_seccion_dorada),
-            ("Secante", self.minimizacion_metodo_secante_corregida)
-        ]
-        
+        metodos = [("Sección Dorada", calculos.minimizacion_seccion_dorada), ("Secante", self.minimizacion_metodo_secante_corregida)]
         resultados = []
+        
         self.texto_resultados.delete(1.0, tk.END)
         self.texto_resultados.insert(tk.END, "Calculando comparación...\n")
         self.ventana_principal.update()
@@ -524,20 +463,13 @@ class InterfazSimulacionProyectiles:
             try:
                 tc_optimo = funcion_metodo(calculos.funcion_velocidad_u, a, b, args)
                 tiempo_calculo = time.time() - tiempo_inicio
-                
                 u_optimo = calculos.funcion_velocidad_u(tc_optimo, D, h, v, phi, T, g)
                 theta_optimo = calculos.funcion_angulo_theta(tc_optimo, D, h, v, phi, T, g)
-                
                 x_col, y_col = calculos.posicion_proyectil_A(tc_optimo, D, h, v, phi, g)
                 
                 resultados.append({
-                    'nombre': nombre_metodo,
-                    'tc': tc_optimo,
-                    'u': u_optimo,
-                    'theta': theta_optimo,
-                    'tiempo': tiempo_calculo,
-                    'y_col': y_col,
-                    'valido': np.isfinite(u_optimo) and u_optimo <= 450
+                    'nombre': nombre_metodo, 'tc': tc_optimo, 'u': u_optimo, 'theta': theta_optimo,
+                    'tiempo': tiempo_calculo, 'y_col': y_col, 'valido': np.isfinite(u_optimo) and u_optimo <= 450
                 })
             except Exception as e:
                 self.texto_resultados.insert(tk.END, f"Error en {nombre_metodo}: {e}\n")
@@ -545,17 +477,13 @@ class InterfazSimulacionProyectiles:
         self.texto_resultados.delete(1.0, tk.END)
         self.texto_resultados.insert(tk.END, "=== COMPARACIÓN DE MÉTODOS ===\n\n")
         
-        for resultado in resultados:
-            self.texto_resultados.insert(tk.END, f"{resultado['nombre']}:\n")
-            self.texto_resultados.insert(tk.END, f"  Tiempo cálculo: {resultado['tiempo']:.8f} s\n")
-            self.texto_resultados.insert(tk.END, f"  tc: {resultado['tc']:.8f} s\n")
-            self.texto_resultados.insert(tk.END, f"  u: {resultado['u']:.8f} m/s\n")
-            self.texto_resultados.insert(tk.END, f"  θ: {np.degrees(resultado['theta']):.8f}°\n")
-            
-            if resultado['valido']:
-                self.texto_resultados.insert(tk.END, f"  ✅ VÁLIDO\n\n")
-            else:
-                self.texto_resultados.insert(tk.END, f"  ⚠️  DIVERGENTE / FUERA DE RANGO\n\n")
+        for res in resultados:
+            self.texto_resultados.insert(tk.END, f"{res['nombre']}:\n")
+            self.texto_resultados.insert(tk.END, f"  Tiempo: {res['tiempo']:.8f} s\n")
+            self.texto_resultados.insert(tk.END, f"  tc: {res['tc']:.8f} s\n")
+            self.texto_resultados.insert(tk.END, f"  u: {res['u']:.8f} m/s\n")
+            self.texto_resultados.insert(tk.END, f"  θ: {np.degrees(res['theta']):.8f}°\n")
+            self.texto_resultados.insert(tk.END, f"  ✅ VÁLIDO\n\n" if res['valido'] else f"  ⚠️  DIVERGENTE\n\n")
 
     def limpiar_resultados(self):
         """Limpia el área de resultados."""
