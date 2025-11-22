@@ -37,6 +37,10 @@ class InterfazSimulacionProyectiles:
         widget.bind("<Button-5>", self._on_mousewheel)
         for child in widget.winfo_children():
             self._bind_mouse_wheel(child)
+    
+    def _configurar_scroll(self, event=None):
+        """Actualiza la región de scroll del canvas."""
+        self.canvas.configure(scrollregion=self.canvas.bbox("all"))
         
     def crear_widgets(self):
         """Crea todos los elementos de la interfaz."""
@@ -63,19 +67,11 @@ class InterfazSimulacionProyectiles:
         # Crear ventana en el canvas
         self.canvas.create_window((0, 0), window=marco_principal, anchor="nw")
         
-        # Función para actualizar la región de scroll
-        def configurar_scroll(event=None):
-            self.canvas.configure(scrollregion=self.canvas.bbox("all"))
+        # Configurar actualización automática de la región de scroll
+        marco_principal.bind("<Configure>", self._configurar_scroll)
         
-        marco_principal.bind("<Configure>", configurar_scroll)
-        
-        # Configurar scroll con la rueda del ratón
-        self.canvas.bind("<MouseWheel>", self._on_mousewheel)  # Windows/Mac
-        self.canvas.bind("<Button-4>", self._on_mousewheel)    # Linux scroll up
-        self.canvas.bind("<Button-5>", self._on_mousewheel)    # Linux scroll down
-        
-        # Propagar eventos de scroll a widgets hijos
-        self._bind_mouse_wheel(marco_principal)
+        # Propagar eventos de scroll a canvas y widgets hijos
+        self._bind_mouse_wheel(self.canvas)
         
         # Título
         titulo_label = ttk.Label(marco_principal, text="Simulación de Colisión de Proyectiles", 
