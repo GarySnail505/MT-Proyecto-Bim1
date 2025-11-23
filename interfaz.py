@@ -22,25 +22,19 @@ class InterfazSimulacionProyectiles:
         """Crea todos los elementos de la interfaz con Scrollbar."""
         
         # --- CONFIGURACIÓN DEL SCROLLBAR GENERAL ---
-        # Creamos un frame contenedor principal
         main_container = ttk.Frame(self.ventana_principal)
         main_container.pack(fill=tk.BOTH, expand=True)
 
-        # Creamos el Canvas (el área dibujable que se puede scrollear)
         my_canvas = tk.Canvas(main_container)
         my_canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 
-        # Creamos el Scrollbar vinculado al Canvas
         my_scrollbar = ttk.Scrollbar(main_container, orient=tk.VERTICAL, command=my_canvas.yview)
         my_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
 
-        # Configuramos el Canvas para usar el Scrollbar
         my_canvas.configure(yscrollcommand=my_scrollbar.set)
         
-        # Creamos un Frame DENTRO del Canvas (este será el que contenga tus widgets)
         scrollable_frame = ttk.Frame(my_canvas)
 
-        # Función para actualizar la región de scroll cuando el frame cambia de tamaño
         scrollable_frame.bind(
             "<Configure>",
             lambda e: my_canvas.configure(
@@ -48,20 +42,16 @@ class InterfazSimulacionProyectiles:
             )
         )
 
-        # Dibujamos el frame dentro del canvas
         my_canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
 
-        # Habilitar scroll con la rueda del ratón (MouseWheel)
         def _on_mousewheel(event):
             my_canvas.yview_scroll(int(-1*(event.delta/120)), "units")
         
-        # Bind para Windows/MacOS
         my_canvas.bind_all("<MouseWheel>", _on_mousewheel)
-        # Bind para Linux (Button-4 y Button-5)
         my_canvas.bind_all("<Button-4>", lambda e: my_canvas.yview_scroll(-1, "units"))
         my_canvas.bind_all("<Button-5>", lambda e: my_canvas.yview_scroll(1, "units"))
 
-        # --- AHORA AGREGAMOS TUS WIDGETS AL 'scrollable_frame' ---
+        # --- WIDGETS ---
         
         marco_principal = ttk.Frame(scrollable_frame, padding="10")
         marco_principal.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
@@ -77,7 +67,7 @@ class InterfazSimulacionProyectiles:
         
         ttk.Label(marco_parametros, text="D (m):").grid(row=0, column=0, sticky=tk.W, padx=5)
         self.entrada_D = ttk.Entry(marco_parametros, width=12)
-        self.entrada_D.insert(0, "120") # Valor seguro por defecto
+        self.entrada_D.insert(0, "120") 
         self.entrada_D.grid(row=0, column=1, padx=5)
         
         ttk.Label(marco_parametros, text="h (m):").grid(row=0, column=2, sticky=tk.W, padx=5)
@@ -120,13 +110,12 @@ class InterfazSimulacionProyectiles:
         self.entrada_factor_vel.grid(row=1, column=1, padx=5)
         ttk.Label(marco_sim, text="(1=lento, 5=rápido)", font=("Arial", 8)).grid(row=1, column=2, columnspan=2, sticky=tk.W, padx=5)
         
-        # Métodos numéricos CON EVENTO DE CAMBIO
+        # Métodos numéricos
         marco_metodos = ttk.LabelFrame(marco_principal, text="Métodos Numéricos", padding="10")
         marco_metodos.grid(row=3, column=0, columnspan=4, sticky=(tk.W, tk.E), pady=10)
         
         self.variable_metodo = tk.StringVar(value="golden")
         
-        # Al ser unificados, el comando actualizar_escenarios solo refresca, no cambia la lista
         radio_golden = ttk.Radiobutton(marco_metodos, text="Sección Dorada", variable=self.variable_metodo, 
                        value="golden", command=self.actualizar_escenarios)
         radio_golden.grid(row=0, column=0, sticky=tk.W, padx=5)
@@ -135,7 +124,7 @@ class InterfazSimulacionProyectiles:
                        value="secant", command=self.actualizar_escenarios)
         radio_secant.grid(row=0, column=1, sticky=tk.W, padx=5)
         
-        # ✅ ESCENARIOS PREDEFINIDOS (UNIFICADOS)
+        # Escenarios
         marco_escenarios = ttk.LabelFrame(marco_principal, text="🎯 Escenarios Predefinidos (Unificados)", padding="10")
         marco_escenarios.grid(row=4, column=0, columnspan=4, sticky=(tk.W, tk.E), pady=10)
         
@@ -144,7 +133,6 @@ class InterfazSimulacionProyectiles:
         self.combo_escenarios = ttk.Combobox(marco_escenarios, width=50, state="readonly")
         self.combo_escenarios.grid(row=0, column=1, padx=5)
         
-        # Campo para ingresar 'a' (solo para relación 3:1)
         self.label_a = ttk.Label(marco_escenarios, text="Valor de a (m):")
         self.label_a.grid(row=0, column=2, sticky=tk.W, padx=5)
         self.entrada_a = ttk.Entry(marco_escenarios, width=8)
@@ -188,7 +176,6 @@ class InterfazSimulacionProyectiles:
         marco_texto.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
         
         self.texto_resultados = tk.Text(marco_texto, height=12, width=85)
-        # Scrollbar interno para el área de texto
         scrollbar_texto = ttk.Scrollbar(marco_texto, orient="vertical", command=self.texto_resultados.yview)
         self.texto_resultados.configure(yscrollcommand=scrollbar_texto.set)
         
@@ -322,33 +309,6 @@ class InterfazSimulacionProyectiles:
             messagebox.showerror("Error de entrada", f"Entrada inválida: {e}")
             return None
 
-    def minimizacion_metodo_secante_corregida(self, func, a, b, args, tol=1e-5, max_iter=100):
-        """Método de la Secante con salvaguardas robustas."""
-        def derivada_aprox(t):
-            h_step = 1e-5
-            if t - h_step <= a or t + h_step >= b: return float('inf')
-            f_mas = func(t + h_step, *args)
-            f_menos = func(t - h_step, *args)
-            if not (np.isfinite(f_mas) and np.isfinite(f_menos)): return float('inf')
-            return (f_mas - f_menos) / (2 * h_step)
-
-        x0, x1 = a + (b - a) * 0.3, a + (b - a) * 0.7
-        f0 = derivada_aprox(x0)
-        
-        for i in range(max_iter):
-            f1 = derivada_aprox(x1)
-            if not np.isfinite(f1) or not np.isfinite(f0): return (x0 + x1) / 2
-            if abs(f1 - f0) < 1e-12: break
-            if abs(f1 - f0) < 1e-15: return x1
-            
-            try: x_new = x1 - f1 * (x1 - x0) / (f1 - f0)
-            except ZeroDivisionError: x_new = (a + b) / 2
-            
-            if x_new < a or x_new > b: x_new = (a + b) / 2
-            if abs(x_new - x1) < tol: return x_new
-            x0, x1, f0 = x1, x_new, f1
-        return x1
-
     def calcular_solucion_optima(self):
         """Calcula la solución óptima usando el método seleccionado."""
         entradas = self.validar_entradas()
@@ -375,7 +335,8 @@ class InterfazSimulacionProyectiles:
             if metodo_seleccionado == "golden":
                 nombre_metodo, tc_optimo = "Sección Dorada", calculos.minimizacion_seccion_dorada(calculos.funcion_velocidad_u, a, b, args)
             else:
-                nombre_metodo, tc_optimo = "Secante", self.minimizacion_metodo_secante_corregida(calculos.funcion_velocidad_u, a, b, args)
+                # AQUÍ USAMOS LA FUNCIÓN ROBUSTA DIRECTO DE CALCULOS.PY
+                nombre_metodo, tc_optimo = "Secante", calculos.minimizacion_metodo_secante(calculos.funcion_velocidad_u, a, b, args)
         except Exception as e:
             messagebox.showerror("Error", f"Error en optimización: {e}")
             return
@@ -414,7 +375,6 @@ class InterfazSimulacionProyectiles:
                 self.texto_resultados.insert(tk.END, f"\n📊 Relación x/y: {ratio:.3f} (Objetivo: ~3.0)\n")
             except: pass
         
-        # --- MODIFICACIÓN: Ya no hay advertencias de altura, solo información ---
         self.texto_resultados.insert(tk.END, f"\n📍 Altura de impacto: {y_col:.2f} m\n")
         
         self.solucion_calculada = {
@@ -430,8 +390,6 @@ class InterfazSimulacionProyectiles:
             messagebox.showwarning("Advertencia", "Primero calcule la solución óptima.")
             return
         
-        # --- MODIFICACIÓN: Se eliminaron las restricciones y advertencias de altura ---
-        # Ahora la simulación arranca directamente sin preguntar, sea cual sea la altura.
         simulacion.simular_y_animar_trayectorias(self.solucion_calculada)
     
     def comparar_metodos_numericos(self):
@@ -451,7 +409,8 @@ class InterfazSimulacionProyectiles:
             return
         
         args = (D, h, v, phi, T, g)
-        metodos = [("Sección Dorada", calculos.minimizacion_seccion_dorada), ("Secante", self.minimizacion_metodo_secante_corregida)]
+        # ACTUALIZADO: Referencia directa a calculos.py
+        metodos = [("Sección Dorada", calculos.minimizacion_seccion_dorada), ("Secante", calculos.minimizacion_metodo_secante)]
         resultados = []
         
         self.texto_resultados.delete(1.0, tk.END)
