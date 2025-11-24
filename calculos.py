@@ -81,12 +81,12 @@ def encontrar_t_max_proyectil_A(h, v, phi, g):
 # --- MÉTODOS NUMÉRICOS OPTIMIZADOS ---
 
 def minimizacion_seccion_dorada(func, a, b, args, tol=1e-5, max_iter=100):
-    """Método de la Sección Dorada para minimización."""
+    """Método de la Sección Dorada para minimización. Retorna (valor_optimo, iteraciones)"""
     gr = (np.sqrt(5) - 1) / 2
     c = b - gr * (b - a)
     d = a + gr * (b - a)
     
-    for _ in range(max_iter):
+    for i in range(max_iter):
         fc = func(c, *args)
         fd = func(d, *args)
         if fc < fd:
@@ -99,16 +99,14 @@ def minimizacion_seccion_dorada(func, a, b, args, tol=1e-5, max_iter=100):
             d = a + gr * (b - a)
         if abs(b - a) < tol: 
             break
-    return (a + b) / 2
+    return (a + b) / 2, i + 1  
 
 def minimizacion_metodo_secante(func, a, b, args, tol=1e-5, max_iter=100):
     """
-    Método de la Secante robusto para encontrar el mínimo (donde derivada es 0).
-    Incluye salvaguardas contra divergencia y divisiones por cero.
+    Método de la Secante robusto. Retorna (valor_optimo, iteraciones)
     """
     def derivada_aprox(t):
         h_step = 1e-5
-        # Verificar límites para no evaluar fuera de rango
         if t - h_step <= a or t + h_step >= b: return float('inf')
         
         f_mas = func(t + h_step, *args)
@@ -117,30 +115,25 @@ def minimizacion_metodo_secante(func, a, b, args, tol=1e-5, max_iter=100):
         if not (np.isfinite(f_mas) and np.isfinite(f_menos)): return float('inf')
         return (f_mas - f_menos) / (2 * h_step)
 
-    # Puntos iniciales centrados en el intervalo para evitar bordes peligrosos
     x0, x1 = a + (b - a) * 0.3, a + (b - a) * 0.7
     f0 = derivada_aprox(x0)
     
     for i in range(max_iter):
         f1 = derivada_aprox(x1)
         
-        # Salvaguardas matemáticas
-        if not np.isfinite(f1) or not np.isfinite(f0): return (x0 + x1) / 2
-        if abs(f1 - f0) < 1e-12: break # Derivada plana
-        if abs(f1 - f0) < 1e-15: return x1
+        if not np.isfinite(f1) or not np.isfinite(f0): return (x0 + x1) / 2, i + 1
+        if abs(f1 - f0) < 1e-12: break
+        if abs(f1 - f0) < 1e-15: return x1, i + 1
         
         try: 
-            # Fórmula de la secante
             x_new = x1 - f1 * (x1 - x0) / (f1 - f0)
         except ZeroDivisionError: 
             x_new = (a + b) / 2
         
-        # Mantener dentro del intervalo [a, b]
         if x_new < a or x_new > b: x_new = (a + b) / 2
         
-        # Convergencia
-        if abs(x_new - x1) < tol: return x_new
+        if abs(x_new - x1) < tol: return x_new, i + 1
         
         x0, x1, f0 = x1, x_new, f1
         
-    return x1
+    return x1, i + 1  

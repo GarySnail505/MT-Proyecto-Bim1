@@ -333,10 +333,11 @@ class InterfazSimulacionProyectiles:
         
         try:
             if metodo_seleccionado == "golden":
-                nombre_metodo, tc_optimo = "Sección Dorada", calculos.minimizacion_seccion_dorada(calculos.funcion_velocidad_u, a, b, args)
+                nombre_metodo = "Sección Dorada"
+                tc_optimo, iteraciones = calculos.minimizacion_seccion_dorada(calculos.funcion_velocidad_u, a, b, args)
             else:
-                # AQUÍ USAMOS LA FUNCIÓN ROBUSTA DIRECTO DE CALCULOS.PY
-                nombre_metodo, tc_optimo = "Secante", calculos.minimizacion_metodo_secante(calculos.funcion_velocidad_u, a, b, args)
+                nombre_metodo = "Secante"
+                tc_optimo, iteraciones = calculos.minimizacion_metodo_secante(calculos.funcion_velocidad_u, a, b, args)
         except Exception as e:
             messagebox.showerror("Error", f"Error en optimización: {e}")
             return
@@ -360,7 +361,8 @@ class InterfazSimulacionProyectiles:
         self.texto_resultados.delete(1.0, tk.END)
         self.texto_resultados.insert(tk.END, f"=== SOLUCIÓN ÓPTIMA ===\n")
         self.texto_resultados.insert(tk.END, f"Método: {nombre_metodo}\n")
-        self.texto_resultados.insert(tk.END, f"Tiempo de cálculo: {tiempo_calculo:.6f} s\n\n")
+        self.texto_resultados.insert(tk.END, f"Tiempo de cálculo: {tiempo_calculo:.6f} s\n")
+        self.texto_resultados.insert(tk.END, f"Iteraciones: {iteraciones}\n\n")
         self.texto_resultados.insert(tk.END, f"Tiempo de colisión (tc): {tc_optimo:.6f} s\n")
         self.texto_resultados.insert(tk.END, f"Velocidad inicial B (u): {u_optimo:.6f} m/s\n")
         self.texto_resultados.insert(tk.END, f"Ángulo de lanzamiento B (θ): {np.degrees(theta_optimo):.6f}°\n\n")
@@ -409,7 +411,6 @@ class InterfazSimulacionProyectiles:
             return
         
         args = (D, h, v, phi, T, g)
-        # ACTUALIZADO: Referencia directa a calculos.py
         metodos = [("Sección Dorada", calculos.minimizacion_seccion_dorada), ("Secante", calculos.minimizacion_metodo_secante)]
         resultados = []
         
@@ -420,7 +421,7 @@ class InterfazSimulacionProyectiles:
         for nombre_metodo, funcion_metodo in metodos:
             tiempo_inicio = time.time()
             try:
-                tc_optimo = funcion_metodo(calculos.funcion_velocidad_u, a, b, args)
+                tc_optimo, iteraciones = funcion_metodo(calculos.funcion_velocidad_u, a, b, args)
                 tiempo_calculo = time.time() - tiempo_inicio
                 u_optimo = calculos.funcion_velocidad_u(tc_optimo, D, h, v, phi, T, g)
                 theta_optimo = calculos.funcion_angulo_theta(tc_optimo, D, h, v, phi, T, g)
@@ -428,7 +429,8 @@ class InterfazSimulacionProyectiles:
                 
                 resultados.append({
                     'nombre': nombre_metodo, 'tc': tc_optimo, 'u': u_optimo, 'theta': theta_optimo,
-                    'tiempo': tiempo_calculo, 'y_col': y_col, 'valido': np.isfinite(u_optimo) and u_optimo <= 450
+                    'tiempo': tiempo_calculo, 'y_col': y_col, 'iteraciones': iteraciones,
+                    'valido': np.isfinite(u_optimo) and u_optimo <= 450
                 })
             except Exception as e:
                 self.texto_resultados.insert(tk.END, f"Error en {nombre_metodo}: {e}\n")
@@ -439,6 +441,7 @@ class InterfazSimulacionProyectiles:
         for res in resultados:
             self.texto_resultados.insert(tk.END, f"{res['nombre']}:\n")
             self.texto_resultados.insert(tk.END, f"  Tiempo: {res['tiempo']:.8f} s\n")
+            self.texto_resultados.insert(tk.END, f"  Iteraciones: {res['iteraciones']}\n")
             self.texto_resultados.insert(tk.END, f"  tc: {res['tc']:.8f} s\n")
             self.texto_resultados.insert(tk.END, f"  u: {res['u']:.8f} m/s\n")
             self.texto_resultados.insert(tk.END, f"  θ: {np.degrees(res['theta']):.8f}°\n")
